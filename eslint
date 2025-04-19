@@ -1,0 +1,108 @@
+// .eslintrc.js
+module.exports = {
+  parser: '@typescript-eslint/parser',
+  parserOptions: {
+    project: 'tsconfig.json',
+    tsconfigRootDir: __dirname,
+    sourceType: 'module',
+    ecmaVersion: 2023,
+  },
+  plugins: [
+    '@typescript-eslint/eslint-plugin',
+    'nestjs',
+    'security',
+    'sonarjs',
+    'unicorn',
+    'jest',
+    'prettier'
+  ],
+  extends: [
+    'eslint:recommended',
+    'plugin:@typescript-eslint/recommended',
+    'plugin:@typescript-eslint/recommended-requiring-type-checking',
+    'plugin:nestjs/recommended',
+    'plugin:security/recommended',
+    'plugin:sonarjs/recommended',
+    'plugin:unicorn/recommended',
+    'plugin:jest/recommended',
+    'prettier'
+  ],
+  root: true,
+  env: {
+    node: true,
+    jest: true,
+    es2022: true
+  },
+  ignorePatterns: ['.eslintrc.js', 'dist', 'node_modules'],
+  rules: {
+    // Core NestJS rules
+    'nestjs/use-validation-pipe': 'error',
+    'nestjs/api-methods-have-documentation': 'warn',
+    'nestjs/controllers-should-supply-api-tags': 'warn',
+    
+    // TypeScript rules
+    '@typescript-eslint/interface-name-prefix': 'off',
+    '@typescript-eslint/explicit-function-return-type': 'error',
+    '@typescript-eslint/explicit-module-boundary-types': 'error',
+    '@typescript-eslint/no-explicit-any': 'error',
+    '@typescript-eslint/no-floating-promises': 'error',
+    '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
+    '@typescript-eslint/require-await': 'error',
+    
+    // Security rules
+    'security/detect-object-injection': 'warn',
+    'security/detect-non-literal-fs-filename': 'error',
+    
+    // Modern JavaScript/TypeScript best practices
+    'unicorn/prefer-module': 'off',
+    'unicorn/filename-case': [
+      'error',
+      {
+        cases: {
+          camelCase: true,
+          pascalCase: true,
+          kebabCase: true
+        }
+      }
+    ],
+    'unicorn/prevent-abbreviations': [
+      'error',
+      {
+        replacements: {
+          props: false,
+          args: false,
+          fn: false,
+          req: false,
+          res: false
+        }
+      }
+    ],
+    
+    // Code quality
+    'sonarjs/no-duplicate-string': 'warn',
+    'sonarjs/cognitive-complexity': ['error', 15],
+    
+    // Jest rules
+    'jest/no-disabled-tests': 'warn',
+    'jest/no-focused-tests': 'error',
+    
+    // Formatting (delegate to Prettier)
+    'prettier/prettier': 'error'
+  },
+  overrides: [
+    {
+      files: ['*.spec.ts', '*.test.ts'],
+      rules: {
+        '@typescript-eslint/no-unsafe-argument': 'off',
+        '@typescript-eslint/no-unsafe-assignment': 'off',
+        '@typescript-eslint/no-unsafe-member-access': 'off'
+      }
+    },
+    {
+      files: ['src/config/**/*.ts'],
+      rules: {
+        'security/detect-object-injection': 'off'
+      }
+    }
+  ]
+};
