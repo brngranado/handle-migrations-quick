@@ -11,6 +11,6 @@ exports["default"] = new typeorm_1.DataSource({
     database: 'test',
     entities: [__dirname + '/**/*.entity{.ts,.js}'],
     migrations: [__dirname + '/migrations/**/*{.ts,.js}'],
-    migrationsRun: true,
+    migrationsRun: false,
     synchronize: false
 });
