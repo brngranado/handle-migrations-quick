@@ -1,9 +1,11 @@
 import { MigrationInterface, QueryRunner } from 'typeorm';
 
-export class CreateSellingTable1745268160696 implements MigrationInterface {
+export class CreateCustomerSupportSalesTable1745291151544
+  implements MigrationInterface
+{
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.query(`
-            CREATE TABLE selling (
+            CREATE TABLE customer_support_sales (
                 id INT PRIMARY KEY AUTO_INCREMENT,
                 user_id INT NOT NULL,
                 stock_id INT NOT NULL,
@@ -18,6 +20,8 @@ export class CreateSellingTable1745268160696 implements MigrationInterface {
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.query(`DROP TABLE IF EXISTS selling`);
+    await queryRunner.query(`
+            DROP TABLE IF EXISTS customer_support_sales;
+        `);
   }
 }
